@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>​
+<Mine>
+<name>Harshitha</name>
+<hobbies>cooking</hobbies>
+<hobbies>painting</hobbies>
+<hobbies>Listening to music</hobbies>
+</Mine>
+
+// for 10 people 
+
+<?xml version="1.0" encoding="utf-8"?>​
+<Group>
+<person1>
+<name>Geetha</name>
+<hobbies>Acting</hobbies>
+<hobbies>Basket ball</hobbies>
+</person1>
+<person2>
+<name>Christian</name>
+<hobbies>surfing internet</hobbies>
+<hobbies>watching series</hobbies>
+</person2>
+<person3>
+<name>Anurag</name>
+<hobbies>dancing</hobbies>
+<hobbies>jumping</hobbies>
+</person3>
+<person4>
+<name>Sravya</name>
+<hobbies>Doing reels</hobbies>
+<hobbies>Dancing</hobbies>
+</person4>
+<person5>
+<name>Yamini</name>
+<hobbies>Make up</hobbies>
+<hobbies>cooking</hobbies>
+</person5>
+<person6>
+<name>Ravi</name>
+<hobbies>Eating</hobbies>
+<hobbies>Sleeping</hobbies>
+</person6>
+<person7>
+<name>Pranathi</name>
+<hobbies>Music</hobbies>
+<hobbies>Dance</hobbies>
+</person7>
+<person8>
+<name>Prudhvi</name>
+<hobbies>Cooking</hobbies>
+<hobbies>Eating</hobbies>
+</person8>
+<person9>
+<name>Madhuri</name>
+<hobbies>Jumping</hobbies>
+<hobbies>Learning</hobbies>
+</person9>
+<person10>
+<name>Alex</name>
+<hobbies>Swimming</hobbies>
+<hobbies>playing instruments</hobbies>
+</person10>
+</Group>
