@@ -1,7 +1,12 @@
-name {
-  font-weight: bold;
+originalName {
+  font-size: 14px;
 }
 
 * {
   display: block;
+}
+
+title{
+  color:red;
+  font-weight: bold;
 }
