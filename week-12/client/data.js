@@ -20,7 +20,7 @@ const renderTable = (data, nameTerm) => {
   let source = data;
 
   if (nameTerm) {
-    source = source.filter(({ name }) => name.toLowerCase().includes(nameTerm));
+    source = source.filter(({ first_name }) => first_name.toLowerCase().includes(nameTerm));
   }
 
   const rows = source.reduce(
@@ -39,7 +39,7 @@ loadData(`./MOCK_DATA.json`).then((data) => renderTable(data));
 const onSubmit = (event) => {
   event.preventDefault();
 
-  const term = event.target.name.value;
+  const term = event.target.first_name.value;
 
   loadData(`./MOCK_DATA.json`).then((data) => renderTable(data, term));
 };
