@@ -11,7 +11,7 @@ const loadData = (path) =>
   });
 
 const renderTable = (data, nameTerm) => {
-  const tableBody = document.getElementById("table-body");
+  const tableBody = document.getElementById("table-main");
 
   if (!tableBody) {
     throw new Error("No table element found");
@@ -24,25 +24,26 @@ const renderTable = (data, nameTerm) => {
   }
 
   const rows = source.reduce(
-    (acc, { id, name, description, price }) =>
+    (acc, { email, first_name, gender, id, ip_address, last_name }) =>
       acc +
-      `<tr id="table-row-${id}"><td>${id}</td><td>${name}</td><td>${description}</td><td>${price}</td></tr>`,
+      `<tr id="table-row-${email}"><td>${email}</td><td>${first_name}</td><td>${gender}</td><td>${id}</td><td>${ip_address}</td><td>${last_name}</td></tr>`,
     ``
   );
+
 
   tableBody.innerHTML = rows;
 };
 
-loadData(`./data.json`).then((data) => renderTable(data));
+loadData(`./MOCK_DATA.json`).then((data) => renderTable(data));
 
 const onSubmit = (event) => {
   event.preventDefault();
 
   const term = event.target.name.value;
 
-  loadData(`./data.json`).then((data) => renderTable(data, term));
+  loadData(`./MOCK_DATA.json`).then((data) => renderTable(data, term));
 };
 
 const onReset = () => {
-  loadData(`./data.json`).then((data) => renderTable(data));
+  loadData(`./MOCK_DATA.json`).then((data) => renderTable(data));
 };
