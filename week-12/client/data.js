@@ -1,60 +1,49 @@
-const htmlToElement = (html) => {
-    const template = document.createElement("template");
-    html = html.trim(); // Never return a text node of whitespace as the result
-    template.innerHTML = html;
-    return template.content.firstChild;
-  };
-  
-  const loadData = (path, callback) => {
+const loadData = (path) =>
+  new Promise((resolve) => {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = ({ target }) => {
       if (target.readyState == 4 && target.status == 200) {
-        callback(target.responseXML);
+        resolve(JSON.parse(target.response));
       }
     };
     xhttp.open("GET", path, true);
     xhttp.send();
-  };
-  
-  const generateTableRow = (item) => {
-    const email = Array.from(item.getElementsByTagName(`email`))[0];
-    const first_name = Array.from(item.getElementsByTagName(`first_name`))[0];
-    const gender = Array.from(item.getElementsByTagName(`gender`))[0];
-    const id = Array.from(item.getElementsByTagName(`id`))[0];
-    const ip_address = Array.from(item.getElementsByTagName(`ip_address`))[0];
-    const last_name = Array.from(item.getElementsByTagName(`last_name`))[0];
-  
+  });
+
+const renderTable = (data, nameTerm) => {
+  const tableBody = document.getElementById("table-body");
+
+  if (!tableBody) {
+    throw new Error("No table element found");
+  }
+
+  let source = data;
+
+  if (nameTerm) {
+    source = source.filter(({ name }) => name.toLowerCase().includes(nameTerm));
+  }
+
+  const rows = source.reduce(
+    (acc, { id, first_name, last_name, email, gender, ip_address }) =>
+      acc +
+      `<tr id="table-row-${id}"><td>${id}</td><td>${first_name}</td><td>${last_name}</td><td>${email}</td><td>${gender}</td><td>${ip_address}</td></tr>`,
+    ``
+  );
 
 
-    return `<tr>
-          <td>${email.textContent}</td>
-          <td>${first_name.textContent} </td>
-          <td>${gender.textContent}</td>
-          <td>${id.textContent}</td>
-          <td>${ip_address.textContent}</td>
-          <td>${last_name.textContent} </td>
-      </tr>`;
-  };
-  
-  const renderTable = (xmlData) => {
-    const table = document.getElementById("table-main");
-  
-    if (!table) {
-      throw new Error("No table element found");
-    }
-  
-    const nodes = Array.from(xmlData.documentElement.childNodes).filter(
-      ({ nodeName }) => nodeName === `element`
-    );
-  
-    nodes.map((elementnode) =>
-      table.appendChild(htmlToElement(generateTableRow(elementnode)))
-    );
-  };
-  
+  tableBody.innerHTML = rows;
+};
 
-  loadData("./data.xml", renderTable);
-  
-  const onReset = () => {
-    window.location.replace(window.location.pathname);
-  };
+loadData(`./MOCK_DATA.json`).then((data) => renderTable(data));
+
+const onSubmit = (event) => {
+  event.preventDefault();
+
+  const term = event.target.name.value;
+
+  loadData(`./MOCK_DATA.json`).then((data) => renderTable(data, term));
+};
+
+const onReset = () => {
+  loadData(`./MOCK_DATA.json`).then((data) => renderTable(data));
+};
